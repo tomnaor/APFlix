@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import { chatCompletionParams } from "./modelConfiguration";
 import { MovieRecommendationRequest } from "./movieRecommendation.types";
 import dotenv from "dotenv";
+import { randomUUID } from "crypto";
 
 dotenv.config();
 const router = express.Router();
@@ -34,7 +35,12 @@ router.post(
           },
         ],
       })) as OpenAI.Chat.ChatCompletion;
-      res.send(chatCompletion.choices[0].message?.function_call?.arguments);
+      res.send({
+        recommendation:
+          chatCompletion.choices[0].message?.function_call?.arguments,
+        user_description: data?.userDescription,
+        id: randomUUID(),
+      });
     } catch (err) {
       if (err instanceof OpenAI.APIError) {
         console.log(err);

@@ -24,7 +24,8 @@ const movieRecommendationParams = {
   properties: {
     movie: {
       type: "string",
-      description: "The movie name e.g. Forrest Gump",
+      description:
+        "The movie name chosen only from the provided movie list e.g. Forrest Gump",
     },
     message: {
       type: "string",
@@ -33,7 +34,7 @@ const movieRecommendationParams = {
       """
       <div>
         <p>
-          Based on your personal preferences and characteristics, I recommend watching "Forrest Gump" (1994) from your provided list. Here's why:
+          Based on your personal preferences and characteristics, I recommend watching "Forrest Gump" (1994) from my movies collection. Here's why:
         </p>
         <h1>Demographic Match:</h1> 
         <p>You mentioned you're a 45-year-old man, and "Forrest Gump" is a classic film that has broad appeal across different age groups.</p>
@@ -45,9 +46,8 @@ const movieRecommendationParams = {
         <p>
           "Forrest Gump" is highly acclaimed and beloved by audiences worldwide. It won several Oscars and remains a favorite for many.
           The film's mix of humor, romance, and its memorable portrayal of historical events make it a fantastic choice for a cozy movie night with your girlfriend.
-          </br>
-          Enjoy your evening!
         </p>
+        <p>Enjoy your evening!</p>
       </div>
       """`,
     },
