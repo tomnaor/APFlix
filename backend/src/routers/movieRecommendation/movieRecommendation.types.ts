@@ -1,3 +1,3 @@
 export interface MovieRecommendationRequest {
-  prompt: string;
+  userDescription: string;
 }

@@ -16,20 +16,33 @@ router.post(
   async (req: Request<{}, {}, MovieRecommendationRequest>, res: Response) => {
     const data = req.body;
 
-    const userPrompt = `return a movie recommendation for """${data.prompt}"""`;
+    if (!data?.userDescription) {
+      res.status(400).send("Missing user description");
+      return;
+    }
 
-    const chatCompletion = (await openai.chat.completions.create({
-      ...chatCompletionParams,
-      messages: [
-        ...chatCompletionParams.messages,
-        {
-          role: "user",
-          content: userPrompt,
-        },
-      ],
-    })) as OpenAI.Chat.ChatCompletion;
+    const userPrompt = `return a movie recommendation for """${data?.userDescription}"""`;
 
-    res.send(chatCompletion.choices);
+    try {
+      const chatCompletion = (await openai.chat.completions.create({
+        ...chatCompletionParams,
+        messages: [
+          ...chatCompletionParams.messages,
+          {
+            role: "user",
+            content: userPrompt,
+          },
+        ],
+      })) as OpenAI.Chat.ChatCompletion;
+      res.send(chatCompletion.choices[0].message?.function_call?.arguments);
+    } catch (err) {
+      if (err instanceof OpenAI.APIError) {
+        console.log(err);
+        res.status(err.status || 400).send(err.message);
+      } else {
+        res.status(400).send(err);
+      }
+    }
   }
 );
 

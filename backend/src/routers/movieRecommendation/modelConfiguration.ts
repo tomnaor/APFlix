@@ -28,12 +28,28 @@ const movieRecommendationParams = {
     },
     message: {
       type: "string",
-      description: `The explanation of the recommendation e.g. 
-        Based on your personal preferences and characteristics, I recommend watching "Forrest Gump" (1994) from your provided list. Here's why: Demographic Match: You mentioned you're a 45-year-old man, and "Forrest Gump" is a classic film that has broad appeal across different age groups.
-        Heartwarming Story: "Forrest Gump" is a heartwarming and touching film that tells the life story of a man with a unique perspective on life. It combines elements of drama, comedy, and romance, making it a great choice for a movie night with your girlfriend.
-        Louisiana Connection: While the film is not set in Louisiana, it does include scenes that take place in the state, particularly New Orleans. This connection to your home state might add an extra layer of enjoyment.
-        Acclaimed and Popular: "Forrest Gump" is highly acclaimed and beloved by audiences worldwide. It won several Oscars and remains a favorite for many.
-        The film's mix of humor, romance, and its memorable portrayal of historical events make it a fantastic choice for a cozy movie night with your girlfriend. Enjoy your evening!`,
+      description: `The explanation of the recommendation written in HTML format e.g.
+      
+      """
+      <div>
+        <p>
+          Based on your personal preferences and characteristics, I recommend watching "Forrest Gump" (1994) from your provided list. Here's why:
+        </p>
+        <h1>Demographic Match:</h1> 
+        <p>You mentioned you're a 45-year-old man, and "Forrest Gump" is a classic film that has broad appeal across different age groups.</p>
+        <h1>Heartwarming Story:</h1> 
+        <p>"Forrest Gump" is a heartwarming and touching film that tells the life story of a man with a unique perspective on life. It combines elements of drama, comedy, and romance, making it a great choice for a movie night with your girlfriend.</p>
+        <h1>Louisiana Connection:</h1>
+        <p>While the film is not set in Louisiana, it does include scenes that take place in the state, particularly New Orleans. This connection to your home state might add an extra layer of enjoyment.</p>
+        <h1>Acclaimed and Popular:</h1> 
+        <p>
+          "Forrest Gump" is highly acclaimed and beloved by audiences worldwide. It won several Oscars and remains a favorite for many.
+          The film's mix of humor, romance, and its memorable portrayal of historical events make it a fantastic choice for a cozy movie night with your girlfriend.
+          </br>
+          Enjoy your evening!
+        </p>
+      </div>
+      """`,
     },
   },
   required: ["movie", "message"],
