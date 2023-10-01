@@ -1,6 +1,7 @@
 export interface MovieRecommendationResponseData {
-  movie: string;
-  message: string;
+  recommendation: string;
+  id: string;
+  user_description: string;
 }
 
 export interface MovieRecommendationRequestData {
