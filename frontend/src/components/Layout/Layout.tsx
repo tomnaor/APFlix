@@ -4,8 +4,7 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div>
-      <h1>Layout</h1>
+    <div className="h-screen w-screen p-5 flex flex-col items-center">
       {children}
     </div>
   );

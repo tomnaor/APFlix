@@ -1,11 +1,13 @@
 import { Layout } from "./components/Layout/Layout";
-import { Button } from "./components/ui/button";
+import { TooltipProvider } from "./components/ui/tooltip";
+import { Home } from "./pages/Home/Home";
 
 function App() {
   return (
     <Layout>
-      <h1>App</h1>
-      <Button variant="default">Click me</Button>
+      <TooltipProvider>
+        <Home />
+      </TooltipProvider>
     </Layout>
   );
 }
