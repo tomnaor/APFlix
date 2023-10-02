@@ -6,8 +6,8 @@ export const Home = () => {
   return (
     <div className="flex flex-col gap-4 w-full h-full max-w-6xl justify-between flex-1 p-3">
       <WelcomeHeader />
-      <MoviesRecommendations />
       <ChatForm />
+      <MoviesRecommendations />
     </div>
   );
 };

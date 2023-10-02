@@ -16,10 +16,12 @@ export const MoviesRecommendations = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    containerRef.current?.scrollTo({
-      top: containerRef.current.scrollHeight,
-      behavior: "smooth",
-    });
+    if (isMutatingMovieRecommendation) {
+      containerRef.current?.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }, [isMutatingMovieRecommendation]);
 
   let content;
@@ -69,12 +71,6 @@ export const MoviesRecommendations = () => {
 
   return (
     <>
-      <div
-        ref={containerRef}
-        className="flex gap-4 p-4 flex-col overflow-auto flex-1 bg-gray-100 rounded-xl border items-center"
-      >
-        {content}
-      </div>
       {isMutatingMovieRecommendation ? (
         <BarLoader
           color="rgb(69, 69, 69)"
@@ -85,6 +81,12 @@ export const MoviesRecommendations = () => {
           }}
         />
       ) : null}
+      <div
+        ref={containerRef}
+        className="flex gap-4 p-4 flex-col overflow-auto flex-1 bg-gray-100 rounded-xl border items-center"
+      >
+        {content}
+      </div>
     </>
   );
 };
