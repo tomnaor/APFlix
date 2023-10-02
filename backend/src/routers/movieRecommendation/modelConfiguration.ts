@@ -24,6 +24,18 @@ const movieRecommendationParams = {
   properties: {
     movie: {
       type: "string",
+      enum: [
+        "The Silence of the Lambs",
+        "Pulp Fiction",
+        "The Shawshank Redemption",
+        "Inception",
+        "Jurassic Park",
+        "The Lord of the Rings: The Fellowship of the Ring",
+        "Fight Club",
+        "Titanic",
+        "The Matrix",
+        "Forrest Gump",
+      ],
       description:
         "The movie name chosen only from the provided movie list e.g. Forrest Gump",
     },
@@ -57,8 +69,8 @@ const movieRecommendationParams = {
 
 export const chatCompletionParams: OpenAI.Chat.ChatCompletionCreateParams = {
   messages: [gptSystemMessage],
-  model: "gpt-3.5-turbo-16k-0613",
-  temperature: 0.2,
+  model: "gpt-4",
+  temperature: 0,
   functions: [
     { name: "movie_recommendation", parameters: movieRecommendationParams },
   ],
