@@ -1,11 +1,15 @@
+import { MoviesCarousel } from "../MoviesCarousel/MoviesCarousel";
+
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="h-screen w-screen flex flex-col items-center">
+    <div className="h-screen w-screen flex items-center justify-evenly">
+      <MoviesCarousel />
       {children}
+      <MoviesCarousel />
     </div>
   );
 };

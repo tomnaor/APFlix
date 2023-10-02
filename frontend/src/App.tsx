@@ -8,11 +8,11 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <TooltipProvider>
+      <TooltipProvider>
+        <Layout>
           <Home />
-        </TooltipProvider>
-      </Layout>
+        </Layout>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }
