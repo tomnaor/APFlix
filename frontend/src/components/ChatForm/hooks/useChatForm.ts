@@ -20,9 +20,10 @@ export const useChatForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { data } = await mutateAsync(values);
-
     formProps.reset();
+    const { data } = await mutateAsync({
+      userDescription: values.userDescription.trim(),
+    });
 
     return data;
   };

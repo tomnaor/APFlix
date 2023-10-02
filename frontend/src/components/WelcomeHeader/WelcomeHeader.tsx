@@ -4,7 +4,7 @@ export const WelcomeHeader = () => {
       <h1 className="scroll-m-20 text-xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
         APFlix
       </h1>
-      <p className="text-center">Your movies recommendation platform</p>
+      <p className="text-sm text-center">Your movies recommendation platform</p>
     </div>
   );
 };

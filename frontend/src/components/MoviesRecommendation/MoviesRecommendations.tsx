@@ -5,6 +5,7 @@ import parse from "html-react-parser";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { moviesMapper } from "./moviesMapper";
 import { useEffect, useRef } from "react";
+import { BarLoader } from "react-spinners";
 
 export const MoviesRecommendations = () => {
   const { data } = useMovieRecommendationsQuery();
@@ -38,39 +39,52 @@ export const MoviesRecommendations = () => {
       return (
         <div
           key={recommendationData.id}
-          className="flex gap-4 flex-col pb-4 items-start border-b"
+          className="flex flex-col pb-4 border-b w-full items-center"
         >
-          <ChatMessage
-            message={recommendationData.user_description}
-            owner="user"
-          />
-          <ChatMessage
-            message={parse(messageWithStyling)}
-            title={JSON.parse(recommendationData?.recommendation)?.movie}
-            owner="bot"
-            img={
-              <img
-                src={
-                  moviesMapper[
-                    JSON.parse(recommendationData?.recommendation)?.movie
-                  ]
-                }
-                className="h-80 rounded-md"
-              />
-            }
-          />
+          <div className="flex gap-4 flex-col">
+            <ChatMessage
+              message={recommendationData.user_description}
+              owner="user"
+            />
+            <ChatMessage
+              message={parse(messageWithStyling)}
+              title={JSON.parse(recommendationData?.recommendation)?.movie}
+              owner="bot"
+              img={
+                <img
+                  src={
+                    moviesMapper[
+                      JSON.parse(recommendationData?.recommendation)?.movie
+                    ]
+                  }
+                  className="h-80 rounded-md"
+                />
+              }
+            />
+          </div>
         </div>
       );
     });
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="flex gap-4 flex-col overflow-auto p-4 flex-1 bg-gray-50 rounded-xl border items-center"
-    >
-      {content}
-      {isMutatingMovieRecommendation ? <p>Loading...</p> : null}
-    </div>
+    <>
+      <div
+        ref={containerRef}
+        className="flex gap-4 p-4 flex-col overflow-auto flex-1 bg-gray-100 rounded-xl border items-center"
+      >
+        {content}
+      </div>
+      {isMutatingMovieRecommendation ? (
+        <BarLoader
+          color="rgb(69, 69, 69)"
+          cssOverride={{
+            background: "rgb(200, 200, 200)",
+            borderRadius: 50,
+            alignSelf: "center",
+          }}
+        />
+      ) : null}
+    </>
   );
 };

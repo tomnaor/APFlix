@@ -26,9 +26,9 @@ export const ChatMessage = ({
           <h2 className="font-semibold leading-none tracking-tight">{title}</h2>
         )}
         {img ? img : null}
-        <p className="flex flex-col rounded-md bg-white p-4 max-w-lg shadow">
+        <div className="flex flex-col rounded-md bg-white p-4 max-w-lg shadow">
           {message}
-        </p>
+        </div>
       </div>
     </div>
   );
