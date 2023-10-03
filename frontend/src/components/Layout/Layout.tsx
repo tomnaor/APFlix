@@ -7,9 +7,9 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="h-screen w-screen flex items-center justify-evenly">
-      <MoviesCarousel />
+      <MoviesCarousel animationDirection="up" />
       {children}
-      <MoviesCarousel />
+      <MoviesCarousel animationDirection="down" />
     </div>
   );
 };

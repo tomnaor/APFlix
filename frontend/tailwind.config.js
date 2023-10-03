@@ -65,15 +65,20 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
-        "infinite-scroll": {
+        "infinite-scroll-up": {
           from: { transform: "translateY(0)" },
           to: { transform: "translateY(-100%)" },
+        },
+        "infinite-scroll-down": {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "infinite-scroll": "infinite-scroll 25s linear infinite",
+        "infinite-scroll-up": "infinite-scroll-up 50s linear infinite",
+        "infinite-scroll-down": "infinite-scroll-down 50s linear infinite",
       },
     },
   },
