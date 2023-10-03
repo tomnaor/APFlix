@@ -6,6 +6,7 @@ import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { moviesMapper } from "./moviesMapper";
 import { useEffect, useRef } from "react";
 import { BarLoader } from "react-spinners";
+import { StopSignSvg } from "./StopSignSvg";
 
 export const MoviesRecommendations = () => {
   const { data } = useMovieRecommendationsQuery();
@@ -34,8 +35,64 @@ export const MoviesRecommendations = () => {
     );
   } else {
     content = data?.map((recommendationData) => {
-      const messageWithStyling = JSON.parse(recommendationData?.recommendation)
-        ?.message.replace(/<h1>/gm, `<h1 classname="text-sm font-semibold">`)
+      const isUserDescription =
+        recommendationData?.recommendation?.isUserDescription;
+      const isSuspicious = recommendationData?.recommendation?.isSuspicious;
+
+      if (isSuspicious) {
+        return (
+          <div
+            key={recommendationData.id}
+            className="flex flex-col pb-4 border-b w-full items-center"
+          >
+            <div className="flex gap-4 flex-col">
+              <ChatMessage
+                message={
+                  <div className="flex gap-2">
+                    <StopSignSvg />
+                    <p className="text-red-500">
+                      Please don't try to manipulate the system. We are here to
+                      help you.
+                    </p>
+                  </div>
+                }
+                title="Suspicious activity detected"
+                owner="bot"
+                key={recommendationData.id}
+              />
+            </div>
+          </div>
+        );
+      }
+
+      if (!isUserDescription) {
+        return (
+          <div
+            key={recommendationData.id}
+            className="flex flex-col pb-4 border-b w-full items-center"
+          >
+            <div className="flex gap-4 flex-col">
+              <ChatMessage
+                message={
+                  <div className="flex gap-2">
+                    <StopSignSvg />
+                    <p className="text-red-500">
+                      Please provide a self description of you and your movie
+                      taste
+                    </p>
+                  </div>
+                }
+                title="No self description provided"
+                owner="bot"
+                key={recommendationData.id}
+              />
+            </div>
+          </div>
+        );
+      }
+
+      const messageWithStyling = recommendationData?.recommendation?.message
+        .replace(/<h1>/gm, `<h1 classname="text-sm font-semibold">`)
         .replace(/<p>/gm, `<p className="text-sm my-2">`);
 
       return (
@@ -50,15 +107,11 @@ export const MoviesRecommendations = () => {
             />
             <ChatMessage
               message={parse(messageWithStyling)}
-              title={JSON.parse(recommendationData?.recommendation)?.movie}
+              title={recommendationData?.recommendation?.movie}
               owner="bot"
               img={
                 <img
-                  src={
-                    moviesMapper[
-                      JSON.parse(recommendationData?.recommendation)?.movie
-                    ]
-                  }
+                  src={moviesMapper[recommendationData?.recommendation?.movie]}
                   className="h-80 rounded-md"
                 />
               }
