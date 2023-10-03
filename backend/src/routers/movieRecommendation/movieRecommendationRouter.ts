@@ -1,7 +1,11 @@
 import express, { Request, Response } from "express";
 import OpenAI from "openai";
 import { chatCompletionParams } from "./modelConfiguration";
-import { MovieRecommendationRequest } from "./movieRecommendation.types";
+import {
+  MovieRecommendationRequest,
+  MovieRecommendationResponseData,
+  movieList,
+} from "./movieRecommendation.types";
 import dotenv from "dotenv";
 import { randomUUID } from "crypto";
 
@@ -35,9 +39,39 @@ router.post(
           },
         ],
       })) as OpenAI.Chat.ChatCompletion;
+
+      const parsedRecommendation = JSON.parse(
+        chatCompletion.choices[0].message?.function_call?.arguments || ""
+      ) as MovieRecommendationResponseData;
+
+      if (
+        parsedRecommendation?.isSuspicious ||
+        !parsedRecommendation?.isUserDescription
+      ) {
+        res.send({
+          recommendation: {
+            isUserDescription: parsedRecommendation?.isUserDescription,
+            isSuspicious: parsedRecommendation?.isSuspicious,
+          },
+          user_description: data?.userDescription,
+          id: randomUUID(),
+        });
+        return;
+      }
+
+      if (!movieList.includes(parsedRecommendation.movie)) {
+        res.send({
+          recommendation: {
+            isSuspicious: true,
+          },
+          user_description: data?.userDescription,
+          id: randomUUID(),
+        });
+        return;
+      }
+
       res.send({
-        recommendation:
-          chatCompletion.choices[0].message?.function_call?.arguments,
+        recommendation: parsedRecommendation,
         user_description: data?.userDescription,
         id: randomUUID(),
       });
