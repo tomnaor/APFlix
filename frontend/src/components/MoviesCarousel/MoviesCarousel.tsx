@@ -11,7 +11,7 @@ export const MoviesCarousel = ({ animationDirection }: MoviesCarouselProps) => {
       : "animate-infinite-scroll-up";
 
   return (
-    <div className="flex flex-col flex-nowrap h-full overflow-hidden gap-4 [mask-image:_linear-gradient(to_top,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
+    <div className="flex-col flex-nowrap h-full overflow-hidden gap-4 [mask-image:_linear-gradient(to_top,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)] hidden lg:flex">
       <ul
         className={`flex flex-col items-center md:justify-start [&_li]:my-4 [&_img]:max-w-none ${animation}`}
       >
