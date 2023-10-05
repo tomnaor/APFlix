@@ -80,6 +80,9 @@ module.exports = {
         "infinite-scroll-up": "infinite-scroll-up 50s linear infinite",
         "infinite-scroll-down": "infinite-scroll-down 50s linear infinite",
       },
+      height: {
+        screen: ["100vh /* fallback for Opera, IE and etc. */", "100dvh"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
